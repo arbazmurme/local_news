@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block mass %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+  <strong class="text-center">{{ message }}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+{% endblock mass %}
+
+
+{% block content %}
+<div class="col-sm-3 bg-dark text-center rounded d-inline-block px-5">
+    <h1 class="mt-5"> Profile </h1>
+    <hr>
+    <h5 class="mt-5"> name : <br></h5> {{user.get_full_name}} <br><br><br>
+    <h5 class="my-2"> email : <br></h5> {{user.email}} <br><br><br>
+    <h5 class="my-2"> userid : <br></h5> {{user}} <br><br><br>
+
+    <hr>
+    <a href="{% url 'EditProfile'%}" class="btn btn-info btn-sm px-5">Edit Profile</a>
+</div>
+
+<div class="col-sm-9">
+  
+    <div class="row">
+        <div class="text-center alert bg-dark w-75 mx-auto my-4" role="alert">
+          <h1>Show Added News Information</h1>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center text-center">
+        <a href="{% url 'AddNews' %}" class="btn btn-info btn-lg my-3">Add New News</a>
+    </div>
+  
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th scope="col" style="width : 2%;">ID</th>
+        <th scope="col" style="width : 28%;">Title</th>
+        <th scope="col" style="width : 55%;">News</th>
+        <th scope="col" style="width : 15%;">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for ns in fm %}
+      <tr>
+        <th scope="row">{{ ns.id }}</th>
+        <td>{{ ns.title }}</td>
+        <td>{{ ns.news }}</td>
+        <td>
+          <a href="{% url 'EditNews' ns.id %}" class="btn btn-info my-4 btn-sm">Edit</a>
+
+          {% if perms.News.delete_news %}
+          <form action="{% url 'DeleteNews' ns.id %}" method="post" class="d-inline">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-info btn-sm" value="Delete">
+          </form>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock content %}

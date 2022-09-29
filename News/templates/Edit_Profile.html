@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="bg-dark mx-auto text-center text-light "
+style="width: 500px; margin-top: 20px; padding: 10px; border-radius: 17px;">
+<form action="" method="post" novalidate>
+    <div class="mx-auto" style="width: 200px;">
+        <h1>Profile Edit</h1> <hr> <br>
+        {% csrf_token %}
+        {% for x in fm %}
+        <div class="form-group">
+            {{ x.label_tag }}
+            {{ x }}
+            {{x.errors|striptags}} <br> <br>
+        </div>
+        {% endfor %}
+        </br>
+    </div>
+
+    <div class="mx-auto" style="width: 380px;">
+        <button type="submit" class="btn btn-primary mb-5 mx-3">Update Profile</button>
+        <a href="{% url 'dashboard'%}" class="btn btn-primary mb-5 mx-3">Back To Dashboard</a>
+    </div>
+</form>
+</div>
+{% endblock content %}

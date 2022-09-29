@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <title>base</title>
+</head>
+
+<body>
+
+    <div class="container-fluid bg-dark">
+        {% include 'navbar.html' %}
+    </div>
+
+    <div class="container">
+        <div class="row my-4">
+            <div class="col-sm-12">
+                {% block mass %}
+                {% endblock mass %}
+            </div>
+        </div>
+
+        <div class="row">
+
+            {% block side %}
+            {% endblock side %}
+
+            {% block content %}
+            {% endblock content %}
+
+        </div>
+    </div>
+    <br><br><br>
+    <footer class="text-center text-white fixed-bottom" style="background-color: #21081a;">
+        <div class="text-center p-2" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2022 Copyright:
+            <a class="text-white" href="https://arbazmurme.com/">arbazmurme.com</a>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'js/jquery.js' %}"></script>
+</body>
+
+</html>

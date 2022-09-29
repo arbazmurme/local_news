@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block mass %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-dark alert-dismissible fade show" role="alert">
+              <strong>{{ message }}</strong> thanks for using locel news.
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock mass %}
+
+{% block content %}
+    <div class="col-sm-12 ">
+        <div class="container mt-3">
+          {% if fm.non_field_errors %}
+              {% for error in fm.non_field_errors %}
+                <div class="alert alert-primary mt-5" role="alert">
+                  {{ error }}
+                </div>
+              {% endfor %}
+            {% endif %}
+            <h2>Today News</h2>
+            {% for ns in fm %}
+            <div class="mt-4 p-5 bg-dark text-white rounded text-center">
+              <h1 class="py-5">{{ ns.title }}</h1> 
+              <p class="pt-3">
+               
+                {{ ns.news }}
+                
+              </p> 
+            </div>
+            {% endfor %}
+            
+
+          </div>
+    </div>
+{% endblock content %}
